@@ -3,7 +3,7 @@ import 'package:sixam_mart/data/model/response/language_model.dart';
 import 'package:sixam_mart/util/images.dart';
 
 class AppConstants {
-  static const String APP_NAME = 'Strix Mart';
+  static const String APP_NAME = 'Heartwish';
   static const double APP_VERSION = 1.4;
 
   static const String BASE_URL = 'https://strix.drazs.com';
@@ -126,9 +126,9 @@ class AppConstants {
         countryCode: 'US',
         languageCode: 'en'),
     LanguageModel(
-        imageUrl: Images.arabic,
-        languageName: 'عربى',
-        countryCode: 'SA',
-        languageCode: 'ar'),
+        imageUrl: Images.english,
+        languageName: 'Hindi',
+        countryCode: 'IN',
+        languageCode: 'hi')
   ];
 }
