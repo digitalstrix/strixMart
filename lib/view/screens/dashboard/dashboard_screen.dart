@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter_zoom_drawer/config.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:sixam_mart/controller/splash_controller.dart';
 import 'package:sixam_mart/helper/responsive_helper.dart';
 import 'package:sixam_mart/util/dimensions.dart';
@@ -27,6 +29,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   List<Widget> _screens;
   GlobalKey<ScaffoldMessengerState> _scaffoldKey = GlobalKey();
   bool _canExit = GetPlatform.isWeb ? true : false;
+  final zoomDrawerController = ZoomDrawerController();
 
   @override
   void initState() {
@@ -38,9 +41,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     _screens = [
       HomeScreen(),
-      FavouriteScreen(),
+      //FavouriteScreen(),
       CartScreen(fromNav: true),
-      OrderScreen(),
+    //  OrderScreen(),
       Container(),
     ];
 
@@ -84,13 +87,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
           }
         }
       },
-      child: Scaffold(
+      child:ZoomDrawer(
+
+        controller: zoomDrawerController,
+      //  style: DrawerStyle.style4,
+menuBackgroundColor: Color.fromARGB(255, 255, 174, 103),
+
+        menuScreen:MenuScreen() ,
+
+        borderRadius: 24.0,
+        showShadow: false,
+        angle: 0.0,
+       // drawerShadowsBackgroundColor: Colors.red[300],
+        slideWidth: MediaQuery.of(context).size.width * 0.60,
+
+        mainScreen:
+
+
+
+      //
+      Scaffold(
         key: _scaffoldKey,
 
         floatingActionButton: ResponsiveHelper.isDesktop(context) ? null : FloatingActionButton(
           elevation: 5,
           backgroundColor: _pageIndex == 2 ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
-          onPressed: () => _setPage(2),
+          onPressed: () => _setPage(1),
           child: CartWidget(color: _pageIndex == 2 ? Theme.of(context).cardColor : Theme.of(context).disabledColor, size: 30),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -105,11 +127,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
             padding: EdgeInsets.all(Dimensions.PADDING_SIZE_EXTRA_SMALL),
             child: Row(children: [
               BottomNavItem(iconData: Icons.home, isSelected: _pageIndex == 0, onTap: () => _setPage(0)),
-              BottomNavItem(iconData: Icons.favorite, isSelected: _pageIndex == 1, onTap: () => _setPage(1)),
+             // BottomNavItem(iconData: Icons.favorite, isSelected: _pageIndex == 1, onTap: () => _setPage(1)),
               Expanded(child: SizedBox()),
-              BottomNavItem(iconData: Icons.shopping_bag, isSelected: _pageIndex == 3, onTap: () => _setPage(3)),
+            //  BottomNavItem(iconData: Icons.shopping_bag, isSelected: _pageIndex == 3, onTap: () => _setPage(3)),
               BottomNavItem(iconData: Icons.menu, isSelected: _pageIndex == 4, onTap: () {
-                Get.bottomSheet(MenuScreen(), backgroundColor: Colors.transparent, isScrollControlled: true);
+if(zoomDrawerController.isOpen()){
+ zoomDrawerController.close();
+}
+else
+  zoomDrawerController.open();
+              //  Get.bottomSheet(MenuScreen(), backgroundColor: Colors.transparent, isScrollControlled: true);
               }),
             ]),
           ),
@@ -123,7 +150,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           },
         ),
       ),
-    );
+    ));
   }
 
   void _setPage(int pageIndex) {

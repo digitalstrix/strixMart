@@ -10,6 +10,7 @@ import 'package:sixam_mart/view/screens/menu/widget/menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pointer_interceptor/pointer_interceptor.dart';
+import 'package:sixam_mart/view/screens/menu/widget/menu_button_sec.dart';
 
 class MenuScreen extends StatefulWidget {
   @override
@@ -29,6 +30,8 @@ class _MenuScreenState extends State<MenuScreen> {
       MenuModel(icon: Images.location, title: 'my_address'.tr, route: RouteHelper.getAddressRoute()),
       MenuModel(icon: Images.language, title: 'language'.tr, route: RouteHelper.getLanguageRoute('menu')),
       MenuModel(icon: Images.coupon, title: 'coupon'.tr, route: RouteHelper.getCouponRoute()),
+      MenuModel(icon: Images.history, title: 'History'.tr, route: RouteHelper.getOrderRoute()),//placed order section
+      MenuModel(icon: Images.mycart, title: 'Heartwishlist'.tr, route: RouteHelper.getMyFavourite()),// order history section
       MenuModel(icon: Images.support, title: 'help_support'.tr, route: RouteHelper.getSupportRoute()),
       MenuModel(icon: Images.policy, title: 'privacy_policy'.tr, route: RouteHelper.getHtmlRoute('privacy-policy')),
       MenuModel(icon: Images.about_us, title: 'about_us'.tr, route: RouteHelper.getHtmlRoute('about-us')),
@@ -49,39 +52,49 @@ class _MenuScreenState extends State<MenuScreen> {
     }
     _menuList.add(MenuModel(icon: Images.log_out, title: _isLoggedIn ? 'logout'.tr : 'sign_in'.tr, route: ''));
 
-    return PointerInterceptor(
-      child: Container(
-        width: Dimensions.WEB_MAX_WIDTH,
-        padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-          color: Theme.of(context).cardColor,
-        ),
-        child: Column(mainAxisSize: MainAxisSize.min, children: [
+    return
+      // PointerInterceptor(
+      // child: Container(
+      //   width: Dimensions.WEB_MAX_WIDTH,
+      //   padding: EdgeInsets.symmetric(horizontal: Dimensions.PADDING_SIZE_SMALL),
+      //   decoration: BoxDecoration(
+      //     borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      //     color: Theme.of(context).cardColor,
+      //   ),
+      //   child: Column(mainAxisSize: MainAxisSize.min, children: [
+      //
+      //     InkWell(
+      //       onTap: () => Get.back(),
+      //       child: Icon(Icons.keyboard_arrow_down_rounded, size: 30),
+      //     ),
+      //     SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
+      Container(
+        color: Colors.white.withOpacity(0.1),
+margin: EdgeInsets.symmetric(vertical: 45),
+          child:
+ListView.builder(
+    shrinkWrap: true,
+    itemCount: _menuList.length,
+    itemBuilder: (context,index){
+  return  MenuButtonSec(menu: _menuList[index], isProfile: index == 0, isLogout: index == _menuList.length-1);
+}));
+          // GridView.builder(
+          //   physics: NeverScrollableScrollPhysics(),
+          //   shrinkWrap: true,
+          //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          //     crossAxisCount: ResponsiveHelper.isDesktop(context) ? 8 : ResponsiveHelper.isTab(context) ? 6 : 4,
+          //     childAspectRatio: (1/_ratio),
+          //     crossAxisSpacing: Dimensions.PADDING_SIZE_EXTRA_SMALL, mainAxisSpacing: Dimensions.PADDING_SIZE_EXTRA_SMALL,
+          //   ),
+          //   itemCount: _menuList.length,
+          //   itemBuilder: (context, index) {
+          //     return MenuButton(menu: _menuList[index], isProfile: index == 0, isLogout: index == _menuList.length-1);
+          //   },
+          // ),
+       //   SizedBox(height: ResponsiveHelper.isMobile(context) ? Dimensions.PADDING_SIZE_SMALL : 0)
 
-          InkWell(
-            onTap: () => Get.back(),
-            child: Icon(Icons.keyboard_arrow_down_rounded, size: 30),
-          ),
-          SizedBox(height: Dimensions.PADDING_SIZE_EXTRA_SMALL),
-
-          GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: ResponsiveHelper.isDesktop(context) ? 8 : ResponsiveHelper.isTab(context) ? 6 : 4,
-              childAspectRatio: (1/_ratio),
-              crossAxisSpacing: Dimensions.PADDING_SIZE_EXTRA_SMALL, mainAxisSpacing: Dimensions.PADDING_SIZE_EXTRA_SMALL,
-            ),
-            itemCount: _menuList.length,
-            itemBuilder: (context, index) {
-              return MenuButton(menu: _menuList[index], isProfile: index == 0, isLogout: index == _menuList.length-1);
-            },
-          ),
-          SizedBox(height: ResponsiveHelper.isMobile(context) ? Dimensions.PADDING_SIZE_SMALL : 0),
-
-        ]),
-      ),
-    );
+        //]),
+     // ),
+   // );
   }
 }

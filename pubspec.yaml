@@ -44,6 +44,8 @@ dependencies:
 #  flutter_facebook_auth: ^3.5.7
   photo_view: ^0.14.0
   image_compression_flutter: ^1.0.2
+  flutter_zoom_drawer: ^3.0.3
+  fwfh_text_style: ^2.22.8+1
 
 dev_dependencies:
   flutter_test:

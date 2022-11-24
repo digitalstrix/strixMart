@@ -71,4 +71,6 @@ class Images {
   static const String pinterest = 'assets/image/pinterest.png';
   static const String orders = 'assets/image/orders.png';
   static const String sender = 'assets/image/sender.png';
+  static const String history = 'assets/image/history.png';
+  static const String mycart = 'assets/image/mycart.png';
 }

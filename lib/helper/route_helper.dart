@@ -25,6 +25,7 @@ import 'package:sixam_mart/view/screens/checkout/order_successful_screen.dart';
 import 'package:sixam_mart/view/screens/checkout/payment_screen.dart';
 import 'package:sixam_mart/view/screens/coupon/coupon_screen.dart';
 import 'package:sixam_mart/view/screens/dashboard/dashboard_screen.dart';
+import 'package:sixam_mart/view/screens/favourite/favourite_screen.dart';
 import 'package:sixam_mart/view/screens/item/item_campaign_screen.dart';
 import 'package:sixam_mart/view/screens/item/item_details_screen.dart';
 import 'package:sixam_mart/view/screens/item/popular_item_screen.dart';
@@ -80,6 +81,7 @@ class RouteHelper {
   static const String updateProfile = '/update-profile';
   static const String coupon = '/coupon';
   static const String notification = '/notification';
+  static const String favourite = '/favourite';
   static const String map = '/map';
   static const String address = '/address';
   static const String orderSuccess = '/order-successful';
@@ -138,6 +140,7 @@ class RouteHelper {
   static String getUpdateProfileRoute() => '$updateProfile';
   static String getCouponRoute() => '$coupon';
   static String getNotificationRoute() => '$notification';
+  static String getMyFavourite() => '$favourite';
   static String getMapRoute(AddressModel addressModel, String page) {
     List<int> _encoded = utf8.encode(jsonEncode(addressModel.toJson()));
     String _data = base64Encode(_encoded);
@@ -252,6 +255,7 @@ class RouteHelper {
     GetPage(name: updateProfile, page: () => getRoute(UpdateProfileScreen())),
     GetPage(name: coupon, page: () => getRoute(CouponScreen())),
     GetPage(name: notification, page: () => getRoute(NotificationScreen())),
+    GetPage(name: favourite, page: () => getRoute(FavouriteScreen())),
     GetPage(name: map, page: () {
       List<int> _decode = base64Decode(Get.parameters['address'].replaceAll(' ', '+'));
       AddressModel _data = AddressModel.fromJson(jsonDecode(utf8.decode(_decode)));
@@ -328,7 +332,9 @@ class RouteHelper {
     }
     return AppConstants.APP_VERSION < _minimumVersion ? UpdateScreen(isUpdate: true)
         : Get.find<SplashController>().configModel.maintenanceMode ? UpdateScreen(isUpdate: false)
-        : Get.find<LocationController>().getUserAddress() == null
-        ? AccessLocationScreen(fromSignUp: false, fromHome: false, route: Get.currentRoute) : navigateTo;
+        : Get.find<LocationController>().getUserAddress() == null?
+    AccessLocationScreen(fromSignUp: false, fromHome: false, route: Get.currentRoute) : navigateTo;
+      // DashboardScreen(pageIndex: 0): navigateTo;
+    //? AccessLocationScreen(fromSignUp: false, fromHome: false, route: Get.currentRoute) : navigateTo;
   }
 }
