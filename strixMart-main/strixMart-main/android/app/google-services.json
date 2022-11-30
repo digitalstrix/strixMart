@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "566789707436",
+    "project_id": "heart-wish",
+    "storage_bucket": "heart-wish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:566789707436:android:f4892c6cdacc36c4d17109",
+        "android_client_info": {
+          "package_name": "com.heartwish.store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "566789707436-4ka9ml8liu0v3l2013q0aploamd30mmk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZdtWGkr3Z6EHCz0S3ed67A8GZc0ErAN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "566789707436-4ka9ml8liu0v3l2013q0aploamd30mmk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
